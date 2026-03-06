@@ -1,0 +1,545 @@
+
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Reem Ashraf Fathy — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+  --bg:#080808;--bg2:#0a0900;
+  --gold:#c9a84c;--gold-l:#f5d98b;--gold-m:#e8c66a;
+  --text:#d4c5a9;--dim:#6b5f4a;--dimmer:#4a3f2e;--bright:#f0e6d0;
+  --border:rgba(201,168,76,.15);
+  --serif:'Cormorant Garamond',serif;
+  --sans:'Raleway',sans-serif;
+}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:hidden}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+a{color:inherit;text-decoration:none}
+
+
+@keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes scrollPulse{0%{opacity:.8;transform:scaleY(0);transform-origin:top}100%{opacity:0;transform:scaleY(1);transform-origin:top}}
+
+
+.gold-gradient{
+  background:linear-gradient(135deg,#c9a84c 0%,#f5d98b 40%,#e8c66a 60%,#c9a84c 100%);
+  background-size:200% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:shimmer 4s linear infinite;
+}
+.fade-up{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
+.fade-up.visible{opacity:1;transform:none}
+.divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.18),transparent)}
+
+
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:68px;padding:0 max(28px,6vw);
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all .5s;
+}
+nav.scrolled{
+  background:rgba(8,8,8,.97);
+  border-bottom:1px solid rgba(201,168,76,.1);
+  backdrop-filter:blur(20px);
+}
+.logo{font-family:var(--serif);font-size:1.3rem;font-weight:600;letter-spacing:.12em}
+.nav-links{display:flex;gap:36px}
+.nav-btn{
+  font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
+  color:#8a7a60;cursor:pointer;padding:4px 0;position:relative;
+  transition:color .3s;font-weight:500;background:none;border:none;
+  font-family:var(--sans);
+}
+.nav-btn::after{
+  content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  transition:width .4s;
+}
+.nav-btn:hover,.nav-btn.active{color:var(--gold)}
+.nav-btn:hover::after,.nav-btn.active::after{width:100%}
+.mob-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.mob-toggle span{width:22px;height:1px;background:var(--gold);display:block}
+.mob-menu{
+  display:none;position:fixed;top:68px;left:0;right:0;z-index:99;
+  background:rgba(8,8,8,.98);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(201,168,76,.1);
+  padding:24px max(28px,6vw);flex-direction:column;gap:20px;
+}
+.mob-menu.open{display:flex}
+@media(max-width:768px){
+  .nav-links{display:none}
+  .mob-toggle{display:flex}
+}
+
+
+#about{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+  padding:68px max(28px,6vw) 0;position:relative;overflow:hidden;
+}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
+.corner-tl{position:absolute;top:120px;left:max(28px,6vw);width:40px;height:40px;border-top:1px solid rgba(201,168,76,.3);border-left:1px solid rgba(201,168,76,.3)}
+.corner-br{position:absolute;bottom:40px;right:max(28px,6vw);width:40px;height:40px;border-bottom:1px solid rgba(201,168,76,.3);border-right:1px solid rgba(201,168,76,.3)}
+.hero-sup{display:flex;align-items:center;gap:16px;margin-bottom:24px;font-family:var(--serif);font-size:.72rem;letter-spacing:.4em;color:var(--gold);text-transform:uppercase}
+.hero-sup::before{content:'';width:32px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+.hero-name{font-family:var(--serif);font-size:clamp(3.2rem,9vw,7.5rem);line-height:1.0;letter-spacing:.02em;margin-bottom:4px}
+.hero-name.last{margin-bottom:28px}
+.typewriter-wrap{display:flex;align-items:center;gap:12px;margin-bottom:36px;height:32px}
+.tw-bar{width:1px;height:20px;background:var(--gold);opacity:.6;flex-shrink:0}
+.tw-text{font-size:clamp(.9rem,2vw,1.1rem);font-weight:300;letter-spacing:.06em;color:var(--text)}
+.tw-cursor{animation:blink 1s infinite;color:var(--gold);font-size:1.1rem;font-weight:300}
+.hero-desc{max-width:540px;line-height:1.9;color:var(--dim);font-size:.92rem;margin-bottom:48px;letter-spacing:.02em}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap}
+.scroll-hint{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;opacity:.5}
+.scroll-hint p{font-size:.6rem;letter-spacing:.25em;color:var(--dimmer);text-transform:uppercase}
+.scroll-line{width:1px;height:48px;background:linear-gradient(to bottom,var(--gold),transparent)}
+
+
+.btn-gold{
+  padding:14px 36px;
+  background:linear-gradient(135deg,#c9a84c,#f5d98b,#c9a84c);
+  background-size:200% auto;
+  color:#080808;border:none;font-family:var(--sans);
+  font-weight:600;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
+  cursor:pointer;border-radius:1px;
+  transition:background-position .4s,transform .2s,box-shadow .3s;
+  box-shadow:0 4px 24px rgba(201,168,76,.2);
+}
+.btn-gold:hover{background-position:right center;box-shadow:0 8px 32px rgba(201,168,76,.35);transform:translateY(-2px)}
+.btn-outline{
+  padding:14px 36px;background:transparent;color:var(--gold);
+  border:1px solid rgba(201,168,76,.4);font-family:var(--sans);
+  font-weight:500;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
+  cursor:pointer;border-radius:1px;transition:all .3s;
+}
+.btn-outline:hover{background:rgba(201,168,76,.07);transform:translateY(-2px)}
+
+section{padding:120px max(28px,6vw)}
+section.alt{background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 50%,var(--bg) 100%)}
+.section-head{text-align:center;margin-bottom:64px}
+.section-sup{font-family:var(--serif);font-size:.72rem;letter-spacing:.35em;color:var(--gold);text-transform:uppercase;margin-bottom:12px}
+.gold-line{width:52px;height:2px;background:linear-gradient(90deg,#c9a84c,#f5d98b,#c9a84c);margin:0 auto 14px;box-shadow:0 0 12px rgba(201,168,76,.4)}
+.section-title{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:600;color:var(--bright);letter-spacing:.04em}
+
+/* ── CARDS ── */
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:24px;max-width:1100px;margin:0 auto}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;max-width:960px;margin:0 auto}
+.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;max-width:1100px;margin:0 auto}
+.card{
+  background:linear-gradient(135deg,#111 0%,#0d0d0d 100%);
+  border:1px solid var(--border);border-radius:2px;padding:36px;
+  position:relative;overflow:hidden;
+  transition:border-color .4s,transform .4s;
+}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.6),transparent);opacity:0;transition:opacity .4s}
+.card:hover{border-color:rgba(201,168,76,.35);transform:translateY(-4px)}
+.card:hover::before{opacity:1}
+.card-badge{font-family:var(--serif);font-size:.68rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:18px}
+.card-role{font-family:var(--serif);font-size:1.5rem;font-weight:600;color:var(--bright);margin-bottom:6px;letter-spacing:.02em}
+.card-sub{font-size:.8rem;color:var(--dim);font-style:italic;margin-bottom:24px;letter-spacing:.04em}
+.bullet-list{list-style:none;display:flex;flex-direction:column;gap:11px}
+.bullet-list li{display:flex;gap:12px;font-size:.84rem;color:var(--dim);line-height:1.7}
+.bullet-list li::before{content:'◆';color:var(--gold);flex-shrink:0;margin-top:4px;font-size:.42rem}
+
+
+.cat-label{font-family:var(--serif);font-size:.68rem;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;margin-bottom:24px;display:flex;align-items:center;gap:10px}
+.cat-label::before{content:'';display:inline-block;width:20px;height:1px;background:var(--gold)}
+.skill-item{margin-bottom:18px}
+.skill-row{display:flex;justify-content:space-between;margin-bottom:7px}
+.skill-name{font-size:.82rem;color:var(--text);letter-spacing:.02em}
+.skill-pct{font-size:.72rem;color:var(--gold);font-family:var(--serif)}
+.skill-track{height:2px;background:rgba(201,168,76,.08);border-radius:1px;overflow:hidden}
+.skill-fill{
+  height:100%;border-radius:1px;width:0;
+  background:linear-gradient(90deg,#c9a84c,#f5d98b);
+  transition:width 1.3s cubic-bezier(.4,0,.2,1);
+  position:relative;
+}
+.skill-fill.animate{width:var(--w)}
+.skill-fill::after{content:'';position:absolute;right:0;top:0;bottom:0;width:3px;background:#fff9e8;box-shadow:0 0 8px rgba(245,217,139,.8);border-radius:1px}
+
+.soft-wrap{text-align:center;margin-top:56px}
+.soft-label{font-size:.68rem;letter-spacing:.3em;color:var(--dimmer);text-transform:uppercase;margin-bottom:20px}
+.soft-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.tag-gold{display:inline-flex;align-items:center;padding:5px 16px;border:1px solid rgba(201,168,76,.3);border-radius:1px;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);background:rgba(201,168,76,.06)}
+
+
+.edu-card{display:flex;gap:28px;flex-wrap:wrap}
+.edu-icon{width:56px;height:56px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.5rem;border:1px solid rgba(201,168,76,.2);border-radius:1px;background:rgba(201,168,76,.04)}
+.edu-body{flex:1;min-width:200px}
+.edu-tag{font-size:.68rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:8px}
+.edu-title{font-family:var(--serif);font-size:1.4rem;font-weight:600;color:var(--bright);margin-bottom:4px}
+.edu-sub{font-size:.8rem;color:var(--dim);font-style:italic;margin-bottom:14px}
+.gpa-row{display:inline-flex;align-items:center;gap:8px}
+.gpa-label{font-size:.7rem;color:var(--dimmer);letter-spacing:.1em;text-transform:uppercase}
+.gpa-val{font-size:.85rem;color:var(--gold);font-family:var(--serif)}
+
+.lang-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.lang-row{display:flex;justify-content:space-between;margin-bottom:8px}
+.lang-name{font-size:.88rem;color:var(--text);font-family:var(--serif)}
+.lang-lvl{font-size:.72rem;color:var(--dim)}
+
+
+.achieve-card{text-align:center}
+.achieve-icon{font-size:2.8rem;margin-bottom:20px;display:inline-block}
+.achieve-icon.float{animation:floatY 3s ease-in-out infinite}
+.achieve-badge{display:inline-flex;align-items:center;padding:4px 14px;border:1px solid rgba(201,168,76,.3);border-radius:1px;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);background:rgba(201,168,76,.06);margin-bottom:14px}
+.achieve-event{font-family:var(--serif);font-size:1.25rem;font-weight:600;color:var(--bright);margin-bottom:8px;line-height:1.3}
+.achieve-org{font-size:.78rem;color:var(--dimmer);letter-spacing:.06em}
+
+
+.contact-wrap{max-width:540px;margin:0 auto}
+.contact-desc{text-align:center;color:var(--dimmer);line-height:1.9;font-size:.88rem;margin-bottom:48px;letter-spacing:.03em}
+.contact-link{
+  display:flex;align-items:center;gap:16px;padding:20px 24px;
+  border:1px solid rgba(201,168,76,.12);border-radius:2px;
+  transition:all .3s;background:rgba(201,168,76,.02);
+  margin-bottom:12px;
+}
+.contact-link:hover{border-color:rgba(201,168,76,.4);background:rgba(201,168,76,.06);transform:translateX(6px)}
+.contact-icon-box{width:44px;height:44px;flex-shrink:0;border:1px solid rgba(201,168,76,.25);display:flex;align-items:center;justify-content:center;font-size:1.1rem;border-radius:1px;background:rgba(201,168,76,.04)}
+.contact-label{font-size:.62rem;color:var(--dimmer);letter-spacing:.2em;text-transform:uppercase;margin-bottom:3px}
+.contact-val{font-size:.88rem;color:var(--text)}
+.contact-arrow{margin-left:auto;color:var(--gold);opacity:.5;font-size:.85rem}
+
+
+footer{border-top:1px solid rgba(201,168,76,.08);padding:32px max(28px,6vw);text-align:center}
+footer p{font-family:var(--serif);font-size:.72rem;color:#2a2218;letter-spacing:.2em;text-transform:uppercase}
+footer span{color:var(--dimmer)}
+</style>
+</head>
+<body>
+
+
+<nav id="mainNav">
+  <div class="logo"><span class="gold-gradient">RAF</span></div>
+  <div class="nav-links">
+    <button class="nav-btn active" onclick="goTo('about')">About</button>
+    <button class="nav-btn" onclick="goTo('experience')">Experience</button>
+    <button class="nav-btn" onclick="goTo('skills')">Skills</button>
+    <button class="nav-btn" onclick="goTo('education')">Education</button>
+    <button class="nav-btn" onclick="goTo('achievements')">Achievements</button>
+    <button class="nav-btn" onclick="goTo('contact')">Contact</button>
+  </div>
+  <button class="mob-toggle" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mob-menu" id="mobMenu">
+  <button class="nav-btn" onclick="goTo('about')">About</button>
+  <button class="nav-btn" onclick="goTo('experience')">Experience</button>
+  <button class="nav-btn" onclick="goTo('skills')">Skills</button>
+  <button class="nav-btn" onclick="goTo('education')">Education</button>
+  <button class="nav-btn" onclick="goTo('achievements')">Achievements</button>
+  <button class="nav-btn" onclick="goTo('contact')">Contact</button>
+</div>
+
+<section id="about">
+  <div class="orb" style="width:500px;height:500px;top:-100px;right:-150px;background:radial-gradient(circle,rgba(201,168,76,.06) 0%,transparent 70%)"></div>
+  <div class="orb" style="width:300px;height:300px;bottom:10%;left:-80px;background:radial-gradient(circle,rgba(201,168,76,.04) 0%,transparent 70%)"></div>
+  <div class="corner-tl"></div>
+  <div class="corner-br"></div>
+
+  <div style="max-width:820px">
+    <p class="hero-sup">Welcome to my portfolio</p>
+    <h1 class="hero-name" style="font-weight:300;color:var(--bright)">Reem</h1>
+    <h1 class="hero-name"><span class="gold-gradient">Ashraf</span></h1>
+    <h1 class="hero-name last" style="font-weight:300;color:var(--bright)">Fathy</h1>
+
+    <div class="typewriter-wrap">
+      <div class="tw-bar"></div>
+      <span class="tw-text" id="twText"></span>
+      <span class="tw-cursor">|</span>
+    </div>
+
+    <p class="hero-desc">
+      Full-Stack .NET Developer specialising in secure, scalable APIs and responsive web applications.
+      Passionate about clean code, agile methodologies, and building impactful digital solutions.
+    </p>
+
+    <div class="hero-btns">
+      <button class="btn-gold" onclick="goTo('contact')">Get In Touch</button>
+      <button class="btn-outline" onclick="goTo('experience')">View Work</button>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <p>Scroll</p>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="experience">
+  <div class="section-head fade-up">
+    <p class="section-sup">Career</p>
+    <div class="gold-line"></div>
+    <h2 class="section-title">Experience</h2>
+  </div>
+  <div class="grid-2">
+    <div class="card fade-up">
+      <p class="card-badge">Internship · Sep 2025 – Present</p>
+      <h3 class="card-role">Full-Stack .NET Developer</h3>
+      <p class="card-sub">DEPI — Digital Egypt Pioneers Initiative</p>
+      <ul class="bullet-list">
+        <li>Designed & developed RESTful APIs using ASP.NET Core with secure, scalable architecture</li>
+        <li>Built & managed SQL Server databases with full CRUD operations and performance optimisations</li>
+        <li>Integrated front-end with back-end via modern frameworks for responsive, user-friendly UIs</li>
+        <li>Delivered end-to-end full-stack solutions collaborating in agile, cross-functional teams</li>
+      </ul>
+    </div>
+    <div class="card fade-up" style="transition-delay:.15s">
+      <p class="card-badge">Self-Learning & Training</p>
+      <h3 class="card-role">Junior Back-End Developer</h3>
+      <p class="card-sub">Practical Projects & Training · .NET Core</p>
+      <ul class="bullet-list">
+        <li>Built RESTful APIs from scratch using ASP.NET Core with clean, maintainable code</li>
+        <li>Developed data access layers using Entity Framework Core and LINQ</li>
+        <li>Implemented JWT-based authentication and authorisation systems</li>
+        <li>Applied Clean Architecture and SOLID principles across multiple projects</li>
+        <li>Managed version control and collaboration workflows using Git & GitHub</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="skills" class="alt">
+  <div class="section-head fade-up">
+    <p class="section-sup">Arsenal</p>
+    <div class="gold-line"></div>
+    <h2 class="section-title">Skills & Expertise</h2>
+  </div>
+  <div class="grid-4">
+    <div class="card fade-up">
+      <p class="cat-label">Languages</p>
+      <div class="skill-item"><div class="skill-row"><span class="skill-name">C#</span><span class="skill-pct">92%</span></div><div class="skill-track"><div class="skill-fill" style="--w:92%"></div></div></div>
+      <div class="skill-item"><div class="skill-row"><span class="skill-name">SQL</span><span class="skill-pct">88%</span></div><div class="skill-track"><div class="skill-fill" style="--w:88%"></div></div></div>
+      <div class="skill-item"><div class="skill-row"><span class="skill-name">C / C++</span><span class="skill-pct">65%</span></div><div class="skill-track"><div class="skill-fill" style="--w:65%"></div></div></div>
+      <div class="skill-item"><div class="skill-row"><span class="skill-name">Python</span><span class="skill-pct">60%</span></div><div class="skill-track"><div class="skill-fill" style="--w:60%"></div></div></div>
+    </div>
+    <div class="card fade-up" style="transition-delay:.1s">
+      <p class="cat-label">Frameworks</p>
+      <div class="skill-item"><div class="skill-row"><span class="skill-name">ASP.NET Core</span><span class="skill-pct">90%</span></div><div class="skill-track"><div class="skill-fill" style="--w:90%"></div></div></div>
+      <div class="skill-item"><div class="skill-row"><span class="skill-name">Entity Framework</span><span class="skill-pct">85%</span></div><div class="skill-track"><div class="skill-fill" style="--w:85%"></div></div></div>
+      <div class="skill-item"><div class="skill-row"><span class="skill-name">MVC / REST APIs</span><span class="skill-pct">88%</span></div><div class="skill-track"><div class="skill-fill" style="--w:88%"></div></div></div>
+      <div class="skill-item"><div class="skill-row"><span class="skill-name">LINQ & Unit Testing</span><span class="skill-pct">78%</span></div><div class="skill-track"><div class="skill-fill" style="--w:78%"></div></div></div>
+    </div>
+    <div class="card fade-up" style="transition-delay:.2s">
+      <p class="cat-label">Tools</p>
+      <div class="skill-item"><div class="skill-row"><span class="skill-name">Visual Studio / VS Code</span><span class="skill-pct">95%</span></div><div class="skill-track"><div class="skill-fill" style="--w:95%"></div></div></div>
+      <div class="skill-item"><div class="skill-row"><span class="skill-name">SQL Server</span><span class="skill-pct">87%</span></div><div class="skill-track"><div class="skill-fill" style="--w:87%"></div></div></div>
+      <div class="skill-item"><div class="skill-row"><span class="skill-name">Git & GitHub</span><span class="skill-pct">85%</span></div><div class="skill-track"><div class="skill-fill" style="--w:85%"></div></div></div>
+    </div>
+    <div class="card fade-up" style="transition-delay:.3s">
+      <p class="cat-label">Architecture</p>
+      <div class="skill-item"><div class="skill-row"><span class="skill-name">Clean Architecture</span><span class="skill-pct">82%</span></div><div class="skill-track"><div class="skill-fill" style="--w:82%"></div></div></div>
+      <div class="skill-item"><div class="skill-row"><span class="skill-name">SOLID Principles</span><span class="skill-pct">85%</span></div><div class="skill-track"><div class="skill-fill" style="--w:85%"></div></div></div>
+      <div class="skill-item"><div class="skill-row"><span class="skill-name">Design Patterns</span><span class="skill-pct">78%</span></div><div class="skill-track"><div class="skill-fill" style="--w:78%"></div></div></div>
+      <div class="skill-item"><div class="skill-row"><span class="skill-name">JWT / Auth</span><span class="skill-pct">83%</span></div><div class="skill-track"><div class="skill-fill" style="--w:83%"></div></div></div>
+    </div>
+  </div>
+  <div class="soft-wrap fade-up">
+    <p class="soft-label">Soft Skills</p>
+    <div class="soft-tags">
+      <span class="tag-gold">Communication</span>
+      <span class="tag-gold">Teamwork</span>
+      <span class="tag-gold">Leadership</span>
+      <span class="tag-gold">Problem-Solving</span>
+      <span class="tag-gold">Agile Mindset</span>
+      <span class="tag-gold">Clean Code</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="education">
+  <div class="section-head fade-up">
+    <p class="section-sup">Academic</p>
+    <div class="gold-line"></div>
+    <h2 class="section-title">Education</h2>
+  </div>
+  <div style="max-width:900px;margin:0 auto;display:grid;gap:24px">
+    <div class="card fade-up">
+      <div class="edu-card">
+        <div class="edu-icon">🎓</div>
+        <div class="edu-body">
+          <p class="edu-tag">Sep 2021 – Expected 2026</p>
+          <h3 class="edu-title">BSc in Computer Engineering</h3>
+          <p class="edu-sub">BHI — Faculty of Engineering</p>
+          <div class="gpa-row"><span class="gpa-label">GPA</span><span class="gpa-val">Very Good ⭐</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="card fade-up" style="transition-delay:.15s">
+      <div class="edu-card">
+        <div class="edu-icon">📚</div>
+        <div class="edu-body">
+          <p class="edu-tag">Apr 2025 – Dec 2025</p>
+          <h3 class="edu-title">Route Academy — .NET Back-End Diploma</h3>
+          <p class="edu-sub">Professional Certification</p>
+          <ul class="bullet-list">
+            <li>Comprehensive training in C#, OOP, and ASP.NET Core</li>
+            <li>RESTful APIs with secure, scalable architecture</li>
+            <li>SQL Server + Entity Framework — database design & management</li>
+            <li>Authentication & Authorisation best practices</li>
+            <li>Real-world back-end systems with clean, maintainable code</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card fade-up" style="transition-delay:.3s">
+      <p class="cat-label">Languages</p>
+      <div class="lang-grid">
+        <div>
+          <div class="lang-row"><span class="lang-name">Arabic</span><span class="lang-lvl">Native</span></div>
+          <div class="skill-track"><div class="skill-fill" style="--w:100%"></div></div>
+        </div>
+        <div>
+          <div class="lang-row"><span class="lang-name">English</span><span class="lang-lvl">Very Good</span></div>
+          <div class="skill-track"><div class="skill-fill" style="--w:80%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="achievements" class="alt">
+  <div class="section-head fade-up">
+    <p class="section-sup">Honours</p>
+    <div class="gold-line"></div>
+    <h2 class="section-title">Achievements</h2>
+  </div>
+  <div class="grid-3">
+    <div class="card achieve-card fade-up">
+      <div class="achieve-icon float">🏆</div>
+      <div class="achieve-badge">1st Place · 2025</div>
+      <h3 class="achieve-event">Tech for Impact Hackathon</h3>
+      <p class="achieve-org">ITIDA</p>
+    </div>
+    <div class="card achieve-card fade-up" style="transition-delay:.15s">
+      <div class="achieve-icon float" style="animation-delay:.4s">🏆</div>
+      <div class="achieve-badge">1st Place · 2025</div>
+      <h3 class="achieve-event">IEEE Project In Competition</h3>
+      <p class="achieve-org">IEEE — Alexandria</p>
+    </div>
+    <div class="card achieve-card fade-up" style="transition-delay:.3s">
+      <div class="achieve-icon">🎯</div>
+      <div class="achieve-badge">Participant · 2024</div>
+      <h3 class="achieve-event">Google Developer Student Clubs</h3>
+      <p class="achieve-org">GDSC Activities</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="contact">
+  <div class="section-head fade-up">
+    <p class="section-sup">Connect</p>
+    <div class="gold-line"></div>
+    <h2 class="section-title">Get In Touch</h2>
+  </div>
+  <div class="contact-wrap">
+    <p class="contact-desc fade-up">
+      Open to new opportunities and collaborations. Whether you have a project in mind or just want to connect — my inbox is always open.
+    </p>
+    <a href="mailto:reem150016@gmail.com" class="contact-link fade-up">
+      <div class="contact-icon-box">✉</div>
+      <div><p class="contact-label">Email</p><p class="contact-val">reem150016@gmail.com</p></div>
+      <span class="contact-arrow">→</span>
+    </a>
+    <a href="tel:+201016171597" class="contact-link fade-up" style="transition-delay:.1s">
+      <div class="contact-icon-box">📞</div>
+      <div><p class="contact-label">Phone</p><p class="contact-val">(+20) 101-617-1597</p></div>
+      <span class="contact-arrow">→</span>
+    </a>
+    <a href="https://linkedin.com/in/reemashraf003" target="_blank" rel="noreferrer" class="contact-link fade-up" style="transition-delay:.2s">
+      <div class="contact-icon-box">💼</div>
+      <div><p class="contact-label">LinkedIn</p><p class="contact-val">linkedin.com/in/reemashraf003</p></div>
+      <span class="contact-arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>Crafted with precision · <span>Reem Ashraf Fathy</span> · 2025</p>
+</footer>
+
+<script>
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 50);
+  highlightNav();
+});
+
+function goTo(id) {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  document.getElementById('mobMenu').classList.remove('open');
+}
+function toggleMenu() {
+  document.getElementById('mobMenu').classList.toggle('open');
+}
+
+function highlightNav() {
+  const secs = ['about','experience','skills','education','achievements','contact'];
+  let cur = 'about';
+  secs.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && window.scrollY >= el.offsetTop - 120) cur = id;
+  });
+  document.querySelectorAll('.nav-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', secs[i] === cur);
+  });
+}
+
+const roles = ['Full-Stack .NET Developer','ASP.NET Core Specialist','API Architect','Clean Code Advocate'];
+let ri = 0, ci = 0, del = false;
+function tick() {
+  const cur = roles[ri];
+  const el = document.getElementById('twText');
+  if (!del) {
+    ci++;
+    el.textContent = cur.slice(0, ci);
+    if (ci === cur.length) { del = true; setTimeout(tick, 2000); return; }
+  } else {
+    ci--;
+    el.textContent = cur.slice(0, ci);
+    if (ci === 0) { del = false; ri = (ri + 1) % roles.length; }
+  }
+  setTimeout(tick, del ? 38 : 75);
+}
+setTimeout(tick, 800);
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+const barObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.skill-fill').forEach((bar, i) => {
+        setTimeout(() => bar.classList.add('animate'), i * 80);
+      });
+    }
+  });
+}, { threshold: 0.2 });
+document.querySelectorAll('.card').forEach(c => barObserver.observe(c));
+</script>
+</body>
+</html>
